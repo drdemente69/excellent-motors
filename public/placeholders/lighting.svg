@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#11161e"/>
+      <stop offset="100%" stop-color="#07090d"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff6b1a"/>
+      <stop offset="100%" stop-color="#2fd9ff"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <rect width="800" height="600" fill="url(#grid)"/>
+  <g transform="translate(400 270)">
+    <circle r="150" fill="none" stroke="url(#ring)" stroke-width="2" opacity="0.55"/>
+    <circle r="110" fill="none" stroke="#ffffff" stroke-opacity="0.10" stroke-width="14" stroke-dasharray="6 10"/>
+    <circle r="60" fill="none" stroke="#ff6b1a" stroke-width="3" opacity="0.8"/>
+    <circle r="14" fill="#ff6b1a" opacity="0.9"/>
+    <circle cx="60.0" cy="0.0" r="7" fill="#0b0e13" stroke="#ff6b1a" stroke-width="2"/><circle cx="30.0" cy="52.0" r="7" fill="#0b0e13" stroke="#ff6b1a" stroke-width="2"/><circle cx="-30.0" cy="52.0" r="7" fill="#0b0e13" stroke="#ff6b1a" stroke-width="2"/><circle cx="-60.0" cy="0.0" r="7" fill="#0b0e13" stroke="#ff6b1a" stroke-width="2"/><circle cx="-30.0" cy="-52.0" r="7" fill="#0b0e13" stroke="#ff6b1a" stroke-width="2"/><circle cx="30.0" cy="-52.0" r="7" fill="#0b0e13" stroke="#ff6b1a" stroke-width="2"/>
+  </g>
+  <text x="400" y="500" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="34" letter-spacing="6" fill="#e8edf4" font-weight="700">LIGHTING</text>
+  <text x="400" y="540" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="16" letter-spacing="4" fill="#ff6b1a">EXCELLENT MOTORS</text>
+</svg>

@@ -1,26 +1,259 @@
 @import "tailwindcss";
+/* tw-animate-css vendored locally — Turbopack's CSS resolver doesn't honour the
+   package's `style` export condition, so we import the file directly. */
+@import "../styles/tw-animate.css";
+
+/* Class-based dark mode: `dark:` variants apply when <html> has the .dark class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Excellent Motors design system — engineered, performance-tech.
+   LIGHT is the default theme (:root). DARK overrides under .dark.
+   The whole UI re-skins by flipping these semantic tokens.
+   Accents: electric orange + steel cyan.
+   ─────────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* surfaces — light */
+  --background: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #eceef2;
+  --foreground: #0d1117;
+  --muted: #eceef2;
+  --muted-foreground: #5a6573;
+  --border: #e2e6ec;
+  --input: #ffffff;
+  --ring: #ff6b1a;
+
+  /* brand */
+  --primary: #e85d04; /* electric orange (slightly deepened for light contrast) */
+  --primary-foreground: #fff7f1;
+  --secondary: #eceef2;
+  --secondary-foreground: #0d1117;
+  --accent: #0a9bbd; /* steel cyan (deepened for light contrast) */
+  --accent-foreground: #ffffff;
+
+  --card: #ffffff;
+  --card-foreground: #0d1117;
+  --popover: #ffffff;
+  --popover-foreground: #0d1117;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --success: #15a34a;
+  --warning: #c2740a;
+
+  --radius: 0.75rem;
+
+  /* theme-adaptive helpers used by brand utilities */
+  --grid-line: color-mix(in oklab, #0d1117 6%, transparent);
+  --glass-bg: color-mix(in oklab, #ffffff 72%, transparent);
+  --glass-border: color-mix(in oklab, #0d1117 9%, transparent);
+  --grad-from: #11161d;
+  --grad-via: #e8731f;
+  --scrollbar-hover: #cdd3db;
+}
+
+.dark {
+  /* surfaces — dark */
+  --background: #07090d;
+  --surface: #0c0f15;
+  --surface-2: #11151c;
+  --foreground: #e8edf4;
+  --muted: #161b23;
+  --muted-foreground: #8a95a6;
+  --border: #1d232d;
+  --input: #1a1f28;
+  --ring: #ff6b1a;
+
+  --primary: #ff6b1a;
+  --primary-foreground: #0a0a0a;
+  --secondary: #19212b;
+  --secondary-foreground: #e8edf4;
+  --accent: #2fd9ff;
+  --accent-foreground: #04121a;
+
+  --card: #0c0f15;
+  --card-foreground: #e8edf4;
+  --popover: #0e1219;
+  --popover-foreground: #e8edf4;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #fef2f2;
+  --success: #22c55e;
+  --warning: #f59e0b;
+
+  --grid-line: color-mix(in oklab, #ffffff 4%, transparent);
+  --glass-bg: color-mix(in oklab, #0c0f15 70%, transparent);
+  --glass-border: color-mix(in oklab, #ffffff 8%, transparent);
+  --grad-from: #ffffff;
+  --grad-via: #ffcaa3;
+  --scrollbar-hover: #2a323e;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--primary) 35%, transparent);
+  color: #fff;
+}
+
+/* Thin, dark scrollbars to match the brand */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover);
+}
+
+/* ── Brand utilities ─────────────────────────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Glassmorphism panel */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid var(--glass-border);
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, var(--grad-from) 0%, var(--grad-via) 45%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--primary) 40%, transparent),
+      0 8px 40px -8px color-mix(in oklab, var(--primary) 55%, transparent);
+  }
+  .glow-accent {
+    box-shadow: 0 0 40px -8px color-mix(in oklab, var(--accent) 55%, transparent);
+  }
+
+  /* Subtle engineered grid backdrop */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Fine film grain overlay */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .radial-fade {
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, #000 40%, transparent 75%);
+  }
+}
+
+/* Thermal receipt printing — isolate #receipt and size for an 80mm roll. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #receipt,
+  #receipt * {
+    visibility: visible;
+  }
+  #receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80mm;
+    margin: 0;
+    padding: 4mm;
+    color: #000 !important;
+    background: #fff !important;
+  }
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
